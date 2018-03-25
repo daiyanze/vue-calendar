@@ -33,11 +33,10 @@
   },
   "keywords": [
     "vue",
-    "eventcalendar",
-    "vue-event-calendar"
+    "calendar",
+    "vue-calendar"
   ],
   "bugs": {
-    "url": "https://github.com/GeoffZhu/vue-event-calendar/issues"
-  },
-  "homepage": "http://geoffzhu.cn/vue-event-calendar/"
+    "url": "https://github.com/daiyanze/vue-calendar/issues"
+  }
 }
