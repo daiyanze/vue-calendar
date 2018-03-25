@@ -1,9 +1,6 @@
-'use strict'
-
 import VueCalendar from './VueCalendar.vue'
 
 function install (Vue, options = {}) {
-  const isVueNext = Vue.version.split('.')[0] === '2'
   const inBrowser = typeof window !== 'undefined'
   let dateObj = new Date()
   const DEFAULT_OPTION = {
