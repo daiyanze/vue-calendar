@@ -1,7 +1,7 @@
 {
   "name": "vue-flat-calendar",
   "description": "A flat design calendar interface for Vue2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "daiyanze <ginoalex8964@yahoo.com>",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --port 8081",
