@@ -11,8 +11,6 @@
     max-width: 1200px;
     margin: 0 auto;
     .cal-wrapper{
-      width: 100%;
-      padding: 100px 50px;
       .date-num{
         line-height: 50px;
       }
@@ -22,7 +20,6 @@
 @media screen and (max-width: 768px) {
   .__vev_calendar-wrapper{
     .cal-wrapper{
-      width: 100%;
       padding: 10px 5px;
       .date-num{
         line-height: 42px;
@@ -33,7 +30,8 @@
 .__vev_calendar-wrapper{
   position: relative;
   overflow: hidden;
-  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   *{
     box-sizing: border-box;
   }
