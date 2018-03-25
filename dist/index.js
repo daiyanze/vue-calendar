@@ -81,8 +81,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = dateTimeFormatter;
-/* harmony export (immutable) */ __webpack_exports__["a"] = isEqualDateStr;
+/* harmony export (immutable) */ __webpack_exports__["a"] = dateTimeFormatter;
+/* unused harmony export isEqualDateStr */
 function dateTimeFormatter(date, format) {
   // 时间格式化辅助函数 date:毫秒数 format:'yyyy-MM-dd hh:mm:ss'
   if (!date || date == "") {
@@ -279,30 +279,12 @@ var inBrowser = typeof window !== 'undefined';
   },
   data: function data() {
     return {
-      selectedDayEvents: {
-        date: 'all',
-        events: this.events || [] //default show all event
-      }
+      selectedDay: ''
     };
   },
 
   props: {
-    title: String,
-    events: {
-      type: Array,
-      required: true,
-      default: [],
-      validator: function validator(events) {
-        var validate = true;
-        events.forEach(function (event, index) {
-          if (!event.date) {
-            console.error('Vue-Event-Calendar-Error:' + 'Prop events Wrong at index ' + index);
-            validate = false;
-          }
-        });
-        return validate;
-      }
-    }
+    title: String
   },
   computed: {
     calendarOptions: function calendarOptions() {
@@ -318,8 +300,7 @@ var inBrowser = typeof window !== 'undefined';
           params: {
             curYear: dateObj.getFullYear(),
             curMonth: dateObj.getMonth(),
-            curDate: dateObj.getDate(),
-            curEventsDate: 'all'
+            curDate: dateObj.getDate()
           }
         };
       }
@@ -332,8 +313,7 @@ var inBrowser = typeof window !== 'undefined';
         return {
           curYear: dateObj.getFullYear(),
           curMonth: dateObj.getMonth(),
-          curDate: dateObj.getDate(),
-          curEventsDate: 'all'
+          curDate: dateObj.getDate()
         };
       }
     }
@@ -346,48 +326,13 @@ var inBrowser = typeof window !== 'undefined';
 
   methods: {
     handleChangeCurDay: function handleChangeCurDay(date) {
-      var events = this.events.filter(function (event) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_methods__["a" /* isEqualDateStr */])(event.date, date);
-      });
-      if (events.length > 0) {
-        this.selectedDayEvents = {
-          date: date,
-          events: events
-        };
-      }
+      this.selectedDay = date;
       this.$emit('day-changed', {
-        date: date,
-        events: events
+        date: date
       });
     },
     handleMonthChanged: function handleMonthChanged(yearMonth) {
       this.$emit('month-changed', yearMonth);
-    }
-  },
-  watch: {
-    calendarParams: function calendarParams() {
-      var _this = this;
-
-      if (this.calendarParams.curEventsDate !== 'all') {
-        var events = this.events.filter(function (event) {
-          return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_methods__["a" /* isEqualDateStr */])(event.date, _this.calendarParams.curEventsDate);
-        });
-        this.selectedDayEvents = {
-          date: this.calendarParams.curEventsDate,
-          events: events
-        };
-      } else {
-        this.selectedDayEvents = {
-          date: 'all',
-          events: this.events
-        };
-      }
-    },
-    events: function events() {
-      this.selectedDayEvents = {
-        date: 'all',
-        events: this.events || []
-      };
     }
   }
 });
@@ -400,9 +345,6 @@ var inBrowser = typeof window !== 'undefined';
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_methods__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_i18n__ = __webpack_require__(7);
-//
-//
-//
 //
 //
 //
@@ -453,10 +395,6 @@ var inBrowser = typeof window !== 'undefined';
   },
 
   props: {
-    events: {
-      type: Array,
-      required: true
-    },
     calendar: {
       type: Object,
       required: true
@@ -495,16 +433,8 @@ var inBrowser = typeof window !== 'undefined';
         }
         tempItem = {
           date: item.getFullYear() + '/' + (item.getMonth() + 1) + '/' + item.getDate(),
-          status: status,
-          customClass: []
+          status: status
         };
-        this.events.forEach(function (event) {
-          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_methods__["a" /* isEqualDateStr */])(event.date, tempItem.date)) {
-            tempItem.title = event.title;
-            tempItem.desc = event.desc || '';
-            if (event.customClass) tempItem.customClass.push(event.customClass);
-          }
-        });
         tempArr.push(tempItem);
       }
       return tempArr;
@@ -515,7 +445,7 @@ var inBrowser = typeof window !== 'undefined';
     },
     curYearMonth: function curYearMonth() {
       var tempDate = Date.parse(new Date(this.calendar.params.curYear + '/' + (this.calendar.params.curMonth + 1) + '/01'));
-      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_methods__["b" /* dateTimeFormatter */])(tempDate, this.i18n[this.calendar.options.locale].format);
+      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_methods__["a" /* dateTimeFormatter */])(tempDate, this.i18n[this.calendar.options.locale].format);
     },
     customColor: function customColor() {
       return this.calendar.options.color;
@@ -791,9 +721,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "__vev_calendar-wrapper"
   }, [_c('cal-panel', {
     attrs: {
-      "events": _vm.events,
       "calendar": _vm.calendarOptions,
-      "selectedDay": _vm.selectedDayEvents.date
+      "selectedDay": _vm.selectedDay
     },
     on: {
       "cur-day-changed": _vm.handleChangeCurDay,
@@ -843,29 +772,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       key: date.date,
       staticClass: "item",
       class: [( _obj = {
-        today: date.status ? (_vm.today == date.date) : false,
-        event: date.status ? (date.title != undefined) : false
+        today: date.status ? (_vm.today == date.date) : false
       }, _obj[_vm.calendar.options.className] = (date.date == _vm.selectedDay), _obj ) ].concat( date.customClass)
     }, [_c('p', {
       staticClass: "date-num",
-      style: ({
-        color: date.title != undefined ? ((date.date == _vm.selectedDay) ? '#fff' : _vm.customColor) : 'inherit'
-      }),
       on: {
         "click": function($event) {
           _vm.handleChangeCurday(date)
         }
       }
-    }, [_vm._v("\n          " + _vm._s(date.status ? date.date.split('/')[2] : ' '))]), _vm._v(" "), (date.status ? (_vm.today == date.date) : false) ? _c('span', {
+    }, [_vm._v("\n          " + _vm._s(date.status ? date.date.split('/')[2] : ' ') + "\n        ")]), _vm._v(" "), (date.status ? (_vm.today == date.date) : false) ? _c('span', {
       staticClass: "is-today",
       style: ({
         backgroundColor: _vm.customColor
       })
-    }) : _vm._e(), _vm._v(" "), (date.status ? (date.title != undefined) : false) ? _c('span', {
+    }) : _vm._e(), _vm._v(" "), (date.date == _vm.selectedDay) ? _c('span', {
       staticClass: "is-event",
       style: ({
-        borderColor: _vm.customColor,
-        backgroundColor: (date.date == _vm.selectedDay) ? _vm.customColor : 'inherit'
+        borderColor: 'darkorange',
+        backgroundColor: 'inherit'
       })
     }) : _vm._e()])
     var _obj;
