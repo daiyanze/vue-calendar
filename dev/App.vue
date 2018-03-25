@@ -3,19 +3,9 @@
     <h1>vue-event-calendar</h1>
     <h2 class="t-center">Default template</h2>
     <vue-calendar
-      :events="demoEvents"
       @day-changed="handleDayChanged"
       @month-changed="handleMonthChanged"
     ></vue-calendar>
-    <h2 class="t-center">Custom template</h2>
-    <vue-calendar :events="demoEvents">
-      <template scope="props">
-        <div v-for="(event, index) in props.showEvents" class="event-item">
-          <!-- In here do whatever you want, make you owner event template -->
-          {{event}}
-        </div>
-      </template>
-    </vue-calendar>
   </div>
 </template>
 
@@ -23,46 +13,6 @@
 let today = new Date()
 export default {
   name: 'app',
-  data () {
-    return {
-      demoEvents: [{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/15`,
-        title: 'Title-1',
-        desc: 'longlonglong description'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/24`,
-        title: 'Title-2'
-      },{
-        date: `${today.getFullYear()}/${today.getMonth() === 11 ? 1 : today.getMonth() + 2}/06`,
-        title: 'Title-3',
-        desc: 'description'
-      }]
-    }
-  },
   methods: {
     handleDayChanged (data) {
     },

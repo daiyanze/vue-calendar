@@ -1,14 +1,14 @@
 <template>
   <div class="__vev_calendar-wrapper">
     <cal-panel
-      :events="events"
       :calendar="calendarOptions"
-      :selectedDay='selectedDayEvents.date'
+      :selectedDay='selectedDay'
       @cur-day-changed="handleChangeCurDay"
       @month-changed="handleMonthChanged">
     </cal-panel>
   </div>
 </template>
+
 <script>
 import { isEqualDateStr } from './utils/methods'
 import CalendarPanel from './components/CalendarPanel.vue'
@@ -21,29 +21,11 @@ export default {
   },
   data () {
     return {
-      selectedDayEvents: {
-        date: 'all',
-        events: this.events || []  //default show all event
-      }
+      selectedDay: ''
     }
   },
   props: {
-    title: String,
-    events: {
-      type: Array,
-      required: true,
-      default: [],
-      validator (events) {
-        let validate = true
-        events.forEach((event, index) => {
-          if (!event.date) {
-            console.error('Vue-Event-Calendar-Error:' + 'Prop events Wrong at index ' + index)
-            validate = false
-          }
-        })
-        return validate
-      }
-    }
+    title: String
   },
   computed: {
     calendarOptions () {
@@ -59,8 +41,7 @@ export default {
           params: {
               curYear: dateObj.getFullYear(),
               curMonth: dateObj.getMonth(),
-              curDate: dateObj.getDate(),
-              curEventsDate: 'all'
+              curDate: dateObj.getDate()
           }
         }
       }
@@ -73,8 +54,7 @@ export default {
         return {
           curYear: dateObj.getFullYear(),
           curMonth: dateObj.getMonth(),
-          curDate: dateObj.getDate(),
-          curEventsDate: 'all'
+          curDate: dateObj.getDate()
         }
       }
     }
@@ -86,46 +66,13 @@ export default {
   },
   methods: {
     handleChangeCurDay (date) {
-      let events = this.events.filter(function(event) {
-        return isEqualDateStr(event.date, date)
-      })
-      if (events.length > 0) {
-        this.selectedDayEvents = {
-          date: date,
-          events: events
-        }
-      }
+      this.selectedDay = date
       this.$emit('day-changed', {
-        date: date,
-        events: events
+        date: date
       })
     },
     handleMonthChanged (yearMonth) {
       this.$emit('month-changed', yearMonth)
-    }
-  },
-  watch: {
-    calendarParams () {
-      if (this.calendarParams.curEventsDate !== 'all') {
-        let events = this.events.filter(event => {
-          return isEqualDateStr(event.date, this.calendarParams.curEventsDate)
-        })
-        this.selectedDayEvents = {
-          date: this.calendarParams.curEventsDate,
-          events
-        }
-      } else {
-        this.selectedDayEvents = {
-          date: 'all',
-          events: this.events
-        }
-      }
-    },
-    events () {
-      this.selectedDayEvents = {
-        date: 'all',
-        events: this.events || []
-      }
     }
   }
 }

@@ -107,6 +107,10 @@
             font-size: 1rem;
             position: relative;
             z-index: 3;
+            &:hover {
+              // color: grey !important;
+              opacity: .5;
+            }
           }
           &.event{
             cursor: pointer;
@@ -118,7 +122,7 @@
           }
           .is-event{
             content: '';
-            border: 1px solid @base-orange;
+            border: 2px solid @base-orange;
             background-color: #fff;
             border-radius: 50%;
             width: 36px;

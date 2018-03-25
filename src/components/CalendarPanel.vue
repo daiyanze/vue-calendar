@@ -19,18 +19,15 @@
         <div v-for="date in dayList" class="item"
           :class="[{
             today: date.status ? (today == date.date) : false,
-            event: date.status ? (date.title != undefined) : false,
             [calendar.options.className] : (date.date == selectedDay)
           }, ...date.customClass]"
           :key="date.date"
           >
-          <p class="date-num"
-            @click="handleChangeCurday(date)"
-            :style="{color: date.title != undefined ? ((date.date == selectedDay) ? '#fff' : customColor) : 'inherit'}">
-            {{date.status ? date.date.split('/')[2] : '&nbsp'}}</p>
+          <p class="date-num" @click="handleChangeCurday(date)">
+            {{date.status ? date.date.split('/')[2] : '&nbsp'}}
+          </p>
           <span v-if="date.status ? (today == date.date) : false" class="is-today" :style="{backgroundColor: customColor }" ></span>
-          <span v-if="date.status ? (date.title != undefined) : false" class="is-event"
-            :style="{borderColor: customColor, backgroundColor: (date.date == selectedDay) ? customColor : 'inherit'}"></span>
+          <span class="is-event" :style="{borderColor: 'darkorange', backgroundColor: 'inherit'}" v-if="date.date == selectedDay"></span>
         </div>
       </div>
     </div>
@@ -50,10 +47,6 @@ export default {
     }
   },
   props: {
-    events: {
-      type: Array,
-      required: true
-    },
     calendar: {
       type: Object,
       required: true
@@ -89,16 +82,8 @@ export default {
           }
           tempItem = {
             date: `${item.getFullYear()}/${item.getMonth()+1}/${item.getDate()}`,
-            status: status,
-            customClass: []
+            status: status
           }
-          this.events.forEach((event) => {
-            if (isEqualDateStr(event.date, tempItem.date)) {
-              tempItem.title = event.title
-              tempItem.desc = event.desc || ''
-              if (event.customClass) tempItem.customClass.push(event.customClass)
-            }
-          })
           tempArr.push(tempItem)
       }
       return tempArr
