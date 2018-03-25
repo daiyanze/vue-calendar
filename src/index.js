@@ -1,13 +1,13 @@
 'use strict'
 
-import vueEventCalendar from './vue-event-calendar.vue'
+import VueCalendar from './VueCalendar.vue'
 
 function install (Vue, options = {}) {
   const isVueNext = Vue.version.split('.')[0] === '2'
   const inBrowser = typeof window !== 'undefined'
   let dateObj = new Date()
   const DEFAULT_OPTION = {
-    locale: 'zh', // en
+    locale: 'en', // en, zh ...
     color: ' #f29543',
     className:'selected-day',
     weekStartOn: 0 // 0 mean sunday
@@ -77,9 +77,9 @@ function install (Vue, options = {}) {
     Calendar.bindEventBus(VueCalendarBarEventBus)
   }
 
-  Vue.component('vue-event-calendar', vueEventCalendar)
+  Vue.component('vue-calendar', VueCalendar)
 
-  Vue.prototype.$EventCalendar = Calendar
+  Vue.prototype.$VueCalendar = Calendar
 }
 
 export default install

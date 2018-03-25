@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import i18n from '../i18n.js'
-import { dateTimeFormatter, isEqualDateStr} from '../tools.js'
+import { dateTimeFormatter, isEqualDateStr} from '@/utils/methods'
+import i18n from '@/utils/i18n'
 
 const inBrowser = typeof window !== 'undefined'
 export default {
-  name: 'cal-panel',
+  name: 'CalendarPanel',
   data () {
     return {
       i18n
@@ -67,7 +67,7 @@ export default {
     dayList () {
       let firstDay = new Date(this.calendar.params.curYear, this.calendar.params.curMonth, 1)
       let dayOfWeek = firstDay.getDay()
-      // 根据当前日期计算偏移量 // Calculate the offset based on the current date
+      // Calculate the offset based on the current date
       if (this.calendar.options.weekStartOn > dayOfWeek) {
         dayOfWeek = dayOfWeek - this.calendar.options.weekStartOn + 7
       } else {
@@ -117,15 +117,16 @@ export default {
   },
   methods: {
     nextMonth () {
-      this.$EventCalendar.nextMonth()
+      this.$VueCalendar.nextMonth()
       this.$emit('month-changed', this.curYearMonth)
     },
     preMonth () {
-      this.$EventCalendar.preMonth()
+      this.$VueCalendar.preMonth()
       this.$emit('month-changed', this.curYearMonth)
     },
     handleChangeCurday (date) {
       if (date.status) {
+        console.log(date)
         this.$emit('cur-day-changed', date.date)
       }
     }
