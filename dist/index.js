@@ -199,11 +199,15 @@ module.exports = function normalizeComponent (
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(8)
+
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(4),
   /* template */
-  __webpack_require__(9),
+  __webpack_require__(10),
   /* scopeId */
   null,
   /* cssModules */
@@ -250,7 +254,7 @@ module.exports = function(originalModule) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_methods__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CalendarPanel_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CalendarPanel_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CalendarPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_CalendarPanel_vue__);
 //
 //
@@ -756,13 +760,19 @@ if (( false ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(5),
   /* template */
-  __webpack_require__(10),
+  __webpack_require__(11),
   /* scopeId */
   null,
   /* cssModules */
@@ -773,7 +783,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -793,7 +803,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: []}
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

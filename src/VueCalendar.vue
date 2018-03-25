@@ -130,3 +130,6 @@ export default {
   }
 }
 </script>
+<style lang="less">
+@import "./static/style.less";
+</style>
